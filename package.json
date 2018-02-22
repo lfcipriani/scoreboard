@@ -1,0 +1,15 @@
+{
+  "name": "scoreboard",
+  "version": "1.0.0",
+  "description": "Scoreboard system for basketball marathons",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/lfcipriani/scoreboard",
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "~1.8.2"
+  }
+}
