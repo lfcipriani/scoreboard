@@ -1,5 +1,8 @@
 setup:
-	@npm install
+	@yarn install
 
 start:
-	@npm start
+	@yarn start
+
+lint:
+	@yarn lint
