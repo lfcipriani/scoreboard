@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "lint": "./node_modules/.bin/eslint app/ main.js"
+    "lint": "./node_modules/.bin/eslint app/ main.js",
+    "test": "jasmine"
   },
   "repository": "https://github.com/lfcipriani/scoreboard",
   "author": "GitHub",
@@ -13,6 +14,7 @@
   "dependencies": {},
   "devDependencies": {
     "electron": "1.8.2",
-    "eslint": "^4.18.1"
+    "eslint": "^4.18.1",
+    "jasmine": "^3.0.0"
   }
 }

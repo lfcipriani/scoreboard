@@ -3,8 +3,13 @@ Look, it's me again build scoreboards
 
 # Setup
 
-    $ npm install yarn -g
     $ make setup
+
+# Tests
+
+    $ make test
+
+Will run eslint and jasmine tests.
 
 # Run
 
