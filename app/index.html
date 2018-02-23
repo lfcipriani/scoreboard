@@ -2,34 +2,37 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Scoreboard</title>
     <link rel="stylesheet" type="text/css" href="vendor/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
     <script src="vendor/jquery-3.1.1.min.js"></script>
     <script src="vendor/semantic.min.js"></script>
   </head>
   <body>
-    <h1 class="ui header">Hello World!</h1>
-
-    <div class="ui relaxed divided list">
-      <div class="item">
-        <i class="large github middle aligned icon"></i>
-        <div class="content">
-          <a class="header">We are using Node.js</a>
-          <div class="description"><script>document.write(process.versions.node)</script></div>
+    <div class="ui middle aligned two column centered grid">
+      <div class="four column centered row">
+        <div class="right aligned column">
+          <div class="ui orange statistic">
+            <div class="value">
+              1489
+            </div>
+            <div class="label">
+              Laranja
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="item">
-        <i class="large github middle aligned icon"></i>
-        <div class="content">
-          <a class="header">Chromium</a>
-          <div class="description"><script>document.write(process.versions.chrome)</script></div>
+        <div class="center aligned column">
+          <p>X</p>
         </div>
-      </div>
-      <div class="item">
-        <i class="large github middle aligned icon"></i>
-        <div class="content">
-          <a class="header">Electron</a>
-          <div class="description"><script>document.write(process.versions.electron)</script></div>
+        <div class="left aligned column">
+          <div class="ui green statistic">
+            <div class="value">
+              2048
+            </div>
+            <div class="label">
+              Verde
+            </div>
+          </div>
         </div>
       </div>
     </div>
