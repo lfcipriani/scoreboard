@@ -3,13 +3,36 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <link rel="stylesheet" type="text/css" href="vendor/semantic.min.css">
+    <script src="vendor/jquery-3.1.1.min.js"></script>
+    <script src="vendor/semantic.min.js"></script>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <h1 class="ui header">Hello World!</h1>
+
+    <div class="ui relaxed divided list">
+      <div class="item">
+        <i class="large github middle aligned icon"></i>
+        <div class="content">
+          <a class="header">We are using Node.js</a>
+          <div class="description"><script>document.write(process.versions.node)</script></div>
+        </div>
+      </div>
+      <div class="item">
+        <i class="large github middle aligned icon"></i>
+        <div class="content">
+          <a class="header">Chromium</a>
+          <div class="description"><script>document.write(process.versions.chrome)</script></div>
+        </div>
+      </div>
+      <div class="item">
+        <i class="large github middle aligned icon"></i>
+        <div class="content">
+          <a class="header">Electron</a>
+          <div class="description"><script>document.write(process.versions.electron)</script></div>
+        </div>
+      </div>
+    </div>
 
     <script>
       // You can also require other files to run in this process
