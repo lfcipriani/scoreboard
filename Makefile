@@ -1,8 +1,6 @@
-test:
-	@make lint && \
-	echo "====> Running tests..." && \
+tist:
+	@yarn lint && \
 	yarn test
-	echo "====> Done!"
 
 setup:
 	@npm install yarn -g && \
@@ -13,7 +11,8 @@ setup:
 start:
 	@yarn start
 
+test:
+	@yarn test
+
 lint:
-	@echo "====> Running linter..." && \
-	yarn lint && \
-	echo "====> Done!"
+	@yarn lint
