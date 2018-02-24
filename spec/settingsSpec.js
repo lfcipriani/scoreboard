@@ -37,4 +37,31 @@ describe("Settings", () => {
     })
   })
 
+  describe("Teams", () => {
+    it("should have default names and no logo", async () => {
+      let settings = new Settings()
+      let result = await settings.teams()
+
+      expect(result.teamA.name).toBe("Nicks")
+      expect(result.teamA.logo).toBe(null)
+      expect(result.teamB.name).toBe("Cavaliers")
+      expect(result.teamB.logo).toBe(null)
+    })
+
+    it("should be able to set names logos", async () => {
+      let teams = {
+        teamA: { name: "Bulls", logo: "bulls.jpg" },
+        teamB: { name: "Hawks", logo: null }
+      }
+      let settings = new Settings()
+      await settings.setTeams(teams)
+      let result = await settings.teams()
+
+      expect(result.teamA.name).toBe("Bulls")
+      expect(result.teamA.logo).toBe("bulls.jpg")
+      expect(result.teamB.name).toBe("Hawks")
+      expect(result.teamB.logo).toBe(null)
+    })
+  })
+
 })
