@@ -5,15 +5,18 @@
     <title>Scoreboard</title>
     <link rel="stylesheet" type="text/css" href="vendor/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="css/app.css">
-    <script src="vendor/jquery-3.1.1.min.js"></script>
+    <!-- See why https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined  -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="vendor/jquery-3.3.1.min.js"></script>
     <script src="vendor/semantic.min.js"></script>
+    <script>if (window.module) module = window.module;</script>
   </head>
   <body>
     <div class="ui middle aligned two column centered grid">
       <div class="four column centered row">
         <div class="right aligned column">
           <div class="ui orange statistic">
-            <div class="value">
+            <div class="value" id="sb-team-a-score-total">
               1489
             </div>
             <div class="label">
@@ -22,11 +25,11 @@
           </div>
         </div>
         <div class="center aligned column">
-          <p>X</p>
+          <p class="sb-action-text">X</p>
         </div>
         <div class="left aligned column">
           <div class="ui green statistic">
-            <div class="value">
+            <div class="value" id="sb-team-b-score-total">
               2048
             </div>
             <div class="label">
@@ -35,11 +38,30 @@
           </div>
         </div>
       </div>
+      <div class="right aligned column">
+        <button class="circular ui button" id="sb-team-a-action-3">
+          <p class="sb-action-text">3</p>
+        </button>
+        <button class="circular ui button" id="sb-team-a-action-2">
+          <p class="sb-action-text">2</p>
+        </button>
+        <button class="circular ui button" id="sb-team-a-action-1">
+          <p class="sb-action-text">1</p>
+        </button>
+      </div>
+      <div class="left aligned column">
+        <button class="circular ui button" id="sb-team-b-action-1">
+          <p class="sb-action-text">1</p>
+        </button>
+        <button class="circular ui button" id="sb-team-b-action-2">
+          <p class="sb-action-text">2</p>
+        </button>
+        <button class="circular ui button" id="sb-team-b-action-3">
+          <p class="sb-action-text">3</p>
+        </button>
+      </div>
     </div>
-
-    <script>
-      // You can also require other files to run in this process
-      //require('./renderer.js')
-    </script>
+    
+    <script src="js/index.js"></script>
   </body>
 </html>
