@@ -9,7 +9,7 @@ let jqElement = {
 describe("Score", () => {
 
   it("mocks jquery element for testing", () => {
-    expect(jqElement.text(3)).toBe(3);
+    expect(jqElement.text(3)).toBe(3)
   })
 
   it("should return zero as default initial value", () => {
