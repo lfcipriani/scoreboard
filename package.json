@@ -5,13 +5,15 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "lint": "./node_modules/.bin/eslint app/ main.js",
+    "lint": "./node_modules/.bin/eslint main.js app/ lib/ spec/",
     "test": "jasmine"
   },
   "repository": "https://github.com/lfcipriani/scoreboard",
   "author": "GitHub",
   "license": "CC0-1.0",
-  "dependencies": {},
+  "dependencies": {
+    "nedb": "^1.8.0"
+  },
   "devDependencies": {
     "electron": "1.8.2",
     "eslint": "^4.18.1",
