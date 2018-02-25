@@ -1,3 +1,5 @@
+/*global SegmentDisplay*/
+
 const remote = require("electron").remote
 const ipc = require("electron").ipcRenderer
 const Score = require("../lib/score")
