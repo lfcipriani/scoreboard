@@ -6,7 +6,7 @@ const GameState = require("../lib/gameState")
 
 $(() => {
   let settings = new Settings(remote.getGlobal("settingsPath"))
-  let displayCountdown = new SegmentDisplay("sb-countdown-canvas");
+  let displayCountdown = new SegmentDisplay("sb-countdown-canvas")
   displayCountdown.pattern         = "###:##:##"
   displayCountdown.displayAngle    = 6
   displayCountdown.digitHeight     = 20

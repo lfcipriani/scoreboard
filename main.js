@@ -1,11 +1,9 @@
-/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "settingsPath" }]*/
-
 const path = require("path")
 const url = require("url")
 require("dotenv").config()
 const electron = require("electron")
-const ipc = require('electron').ipcMain
-const dialog = require('electron').dialog
+const ipc = require("electron").ipcMain
+const dialog = require("electron").dialog
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
