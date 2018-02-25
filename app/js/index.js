@@ -1,4 +1,5 @@
 const remote = require("electron").remote
+const ipc = require("electron").ipcRenderer
 const Score = require("../lib/score")
 const Settings = require("../lib/settings")
 const GameState = require("../lib/gameState")
@@ -167,6 +168,7 @@ $(() => {
       )
       setupSchedule(settings, $("#sb-countdown"), scheduleStateChange)
       setupTeams(settings)
+      $("#testing-images").attr("src", `file:///${$("#sb-settings-team-b-logo").val()}`)
       $("#sb-settings-btn").find("div.label").hide()
       $(".ui.sidebar").sidebar("hide")
     }
@@ -176,4 +178,14 @@ $(() => {
     $(".ui.sidebar").sidebar("hide")
   })
 
+  $("#sb-settings-team-a-logo-btn").click(() => {
+    ipc.send("open-file-dialog", "#sb-settings-team-a-logo")
+  })
+  $("#sb-settings-team-b-logo-btn").click(() => {
+    ipc.send("open-file-dialog", "#sb-settings-team-b-logo")
+  })
+
+  ipc.on("selected-file", function (event, arg) {
+    $(arg.element).val(arg.files[0])
+  })
 })

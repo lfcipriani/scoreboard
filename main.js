@@ -4,6 +4,8 @@ const path = require("path")
 const url = require("url")
 require("dotenv").config()
 const electron = require("electron")
+const ipc = require('electron').ipcMain
+const dialog = require('electron').dialog
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
@@ -36,6 +38,14 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", createWindow)
+
+ipc.on("open-file-dialog", function (event, element) {
+  dialog.showOpenDialog({
+    properties: ["openFile"]
+  }, (files) => {
+    if (files) event.sender.send("selected-file", { files: files, element: element})
+  })
+})
 
 // app.on("window-all-closed", function () {
 //   // On OS X it is common for applications and their menu bar
