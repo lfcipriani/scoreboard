@@ -4,67 +4,169 @@
     <meta charset="UTF-8">
     <title>Scoreboard</title>
     <link rel="stylesheet" type="text/css" href="vendor/semantic.slate.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/calendar.min.css">
     <link rel="stylesheet" type="text/css" href="css/app.css">
     <!-- See why https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined  -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="vendor/jquery-3.3.1.min.js"></script>
     <script src="vendor/jquery.countdown.min.js"></script>
     <script src="vendor/semantic.min.js"></script>
+    <script src="vendor/calendar.min.js"></script>
     <script>if (window.module) module = window.module;</script>
   </head>
   <body>
-    <div class="ui middle aligned two column centered grid">
-      <div class="four column centered row">
-        <div class="center aligned column" id="sb-countdown">
-          Loading...
+    <!-- Settings sidebar -->
+    <div class="ui right wide sidebar">
+      <div class="ui one padded column grid">
+        <div class="column sb-settings-panel">
+
+          <!-- Team settings -->
+          <div class="ui raised segment">
+            <a class="ui blue ribbon label">Teams</a>
+            <span>Add team details</span>
+            <div class="ui tiny form">
+              <h4 class="ui dividing header">Team A</h4>
+              <div class="two fields">
+                <div class="field">
+                  <label>Name</label>
+                  <input id="sb-settings-team-a-name" placeholder="Nicks" type="text">
+                </div>
+                <div class="field">
+                  <label>Logo</label>
+                  <input id="sb-settings-team-a-logo" placeholder="select" type="text">
+                </div>
+              </div>
+              <h4 class="ui dividing header">Team B</h4>
+              <div class="two fields">
+                <div class="field">
+                  <label>Name</label>
+                  <input id="sb-settings-team-b-name" placeholder="Cavaliers" type="text">
+                </div>
+                <div class="field">
+                  <label>Logo</label>
+                  <input id="sb-settings-team-b-logo" placeholder="select" type="text">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Schedule settings -->
+          <div class="ui raised segment">
+            <a class="ui blue ribbon label">Schedule</a>
+            <span>Set game start and end</span>
+            <div class="ui tiny form">
+              <div class="field">
+                <label>Start</label>
+                <div class="ui calendar" id="sb-settings-schedule-start">
+                  <div class="ui input left icon">
+                    <i class="calendar icon"></i>
+                    <input type="text" placeholder="Date/Time">
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label>End</label>
+                <div class="ui calendar" id="sb-settings-schedule-end">
+                  <div class="ui input left icon">
+                    <i class="calendar icon"></i>
+                    <input type="text" placeholder="Date/Time">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit button -->
+          <div class="ui raised segment">
+            <div class="ui two column grid">
+              <div class="row">
+                <div class="column">
+                  <button class="fluid ui small red button" id="sb-settings-restart-btn">Restart</button>
+                </div>
+                <div class="column">
+                  <button class="fluid ui small button" id="sb-settings-cancel-btn">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="four column centered row">
-        <div class="right aligned column">
-          <div class="ui orange statistic">
-            <div class="value" id="sb-team-a-score-total">
-              1489
+    </div>
+
+    <!-- Main content -->
+    <div class="dimmed pusher">
+
+      <div class="ui one column grid">
+        <div class="row">
+          <div class="right aligned column">
+            <button class="ui icon button sb-labelled" id="sb-settings-btn">
+              <i class="cogs icon"></i>
+              <div class="floating ui tiny red label">!</div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui middle aligned two column centered grid">
+        <!-- Countdown -->
+        <div class="four column centered row">
+          <div class="center aligned column" id="sb-countdown">
+            Loading...
+          </div>
+        </div>
+
+        <!-- Scores -->
+        <div class="four column centered row">
+          <div class="right aligned column">
+            <div class="ui orange statistic">
+              <div class="value" id="sb-team-a-score-total">
+                1489
+              </div>
+              <div class="label" id="sb-team-a-name">
+                Laranja
+              </div>
             </div>
-            <div class="label" id="sb-team-a-name">
-              Laranja
+          </div>
+          <div class="center aligned column">
+            <p class="sb-action-text">X</p>
+          </div>
+          <div class="left aligned column">
+            <div class="ui green statistic">
+              <div class="value" id="sb-team-b-score-total">
+                2048
+              </div>
+              <div class="label" id="sb-team-b-name">
+                Verde
+              </div>
             </div>
           </div>
         </div>
-        <div class="center aligned column">
-          <p class="sb-action-text">X</p>
+
+        <!-- Action buttons -->
+        <div class="right aligned column">
+          <button class="circular ui button" id="sb-team-a-action-3">
+            <p class="sb-action-text">3</p>
+          </button>
+          <button class="circular ui button" id="sb-team-a-action-2">
+            <p class="sb-action-text">2</p>
+          </button>
+          <button class="circular ui button" id="sb-team-a-action-1">
+            <p class="sb-action-text">1</p>
+          </button>
         </div>
         <div class="left aligned column">
-          <div class="ui green statistic">
-            <div class="value" id="sb-team-b-score-total">
-              2048
-            </div>
-            <div class="label" id="sb-team-b-name">
-              Verde
-            </div>
-          </div>
+          <button class="circular ui button" id="sb-team-b-action-1">
+            <p class="sb-action-text">1</p>
+          </button>
+          <button class="circular ui button" id="sb-team-b-action-2">
+            <p class="sb-action-text">2</p>
+          </button>
+          <button class="circular ui button" id="sb-team-b-action-3">
+            <p class="sb-action-text">3</p>
+          </button>
         </div>
-      </div>
-      <div class="right aligned column">
-        <button class="circular ui button" id="sb-team-a-action-3">
-          <p class="sb-action-text">3</p>
-        </button>
-        <button class="circular ui button" id="sb-team-a-action-2">
-          <p class="sb-action-text">2</p>
-        </button>
-        <button class="circular ui button" id="sb-team-a-action-1">
-          <p class="sb-action-text">1</p>
-        </button>
-      </div>
-      <div class="left aligned column">
-        <button class="circular ui button" id="sb-team-b-action-1">
-          <p class="sb-action-text">1</p>
-        </button>
-        <button class="circular ui button" id="sb-team-b-action-2">
-          <p class="sb-action-text">2</p>
-        </button>
-        <button class="circular ui button" id="sb-team-b-action-3">
-          <p class="sb-action-text">3</p>
-        </button>
+
       </div>
     </div>
 

@@ -9,11 +9,11 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 
 let mainWindow
-let settingsPath = path.join(app.getPath("appData"),
+global.settingsPath = path.join(app.getPath("appData"),
   "scoreboard", process.env.SCOREBOARD_DB_SETTINGS)
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 1000, height: 700})
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, "app/index.html"),

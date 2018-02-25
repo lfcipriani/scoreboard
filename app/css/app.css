@@ -1,7 +1,19 @@
-body {
-  padding: 30px;
+.pusher {
+  padding: 20px;
 }
 
 .sb-action-text {
   font-size: 30pt;
+}
+
+.sb-labelled {
+  position: relative;
+}
+
+.sb-settings-panel {
+  margin: 0px 0px 0px 10px;
+}
+
+.sb-settings-panel .form {
+  margin-top: 10px;
 }
