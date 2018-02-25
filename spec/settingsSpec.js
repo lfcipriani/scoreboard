@@ -14,20 +14,20 @@ describe("Settings", () => {
 
     it("should set a date range as schedule", async () => {
       let settings = new Settings()
-      await settings.setSchedule("2018-02-24 19:45", "2018-02-25 20:13")
+      await settings.setSchedule("2018/02/24 19:45:00", "2018/02/25 20:13:00")
       let result = await settings.schedule()
 
-      expect(result.start).toBe("2018-02-24 19:45")
-      expect(result.end).toBe("2018-02-25 20:13")
+      expect(result.start).toBe("2018/02/24 19:45:00")
+      expect(result.end).toBe("2018/02/25 20:13:00")
     })
 
     it("should save on a file if filename is set", async () => {
       let settings = new Settings("./temp-settings.db")
-      await settings.setSchedule("2018-02-24 19:45", "2018-02-25 20:13")
+      await settings.setSchedule("2018/02/24 19:45:00", "2018/02/25 20:13:00")
       let result = await settings.schedule()
 
-      expect(result.start).toBe("2018-02-24 19:45")
-      expect(result.end).toBe("2018-02-25 20:13")
+      expect(result.start).toBe("2018/02/24 19:45:00")
+      expect(result.end).toBe("2018/02/25 20:13:00")
 
       try {
         fs.unlinkSync("./temp-settings.db")
