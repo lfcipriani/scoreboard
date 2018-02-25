@@ -4,7 +4,6 @@ describe("GameState", () => {
 
   it("should return 'not_configured' in case there's no settings", () => {
     let schedule = { start: null, end: null }
-    let now = new Date("2018/02/25 12:34:00").getTime()
     let state = new GameState(schedule)
 
     expect(state.current()).toBe("not_configured")
