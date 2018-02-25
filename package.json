@@ -12,6 +12,7 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "dependencies": {
+    "dotenv": "^5.0.0",
     "nedb": "^1.8.0"
   },
   "devDependencies": {
