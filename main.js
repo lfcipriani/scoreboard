@@ -1,11 +1,16 @@
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "settingsPath" }]*/
+
+const path = require("path")
+const url = require("url")
+require("dotenv").config()
 const electron = require("electron")
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
-const path = require("path")
-const url = require("url")
 
 let mainWindow
+let settingsPath = path.join(app.getPath("appData"),
+  "scoreboard", process.env.SCOREBOARD_DB_SETTINGS)
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 800, height: 600})
