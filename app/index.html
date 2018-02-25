@@ -8,11 +8,17 @@
     <!-- See why https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined  -->
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
     <script src="vendor/jquery-3.3.1.min.js"></script>
+    <script src="vendor/jquery.countdown.min.js"></script>
     <script src="vendor/semantic.min.js"></script>
     <script>if (window.module) module = window.module;</script>
   </head>
   <body>
     <div class="ui middle aligned two column centered grid">
+      <div class="four column centered row">
+        <div class="center aligned column" id="sb-countdown">
+          Loading...
+        </div>
+      </div>
       <div class="four column centered row">
         <div class="right aligned column">
           <div class="ui orange statistic">
