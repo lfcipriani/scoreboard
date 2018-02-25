@@ -12,6 +12,7 @@
     <script src="vendor/jquery.countdown.min.js"></script>
     <script src="vendor/semantic.min.js"></script>
     <script src="vendor/calendar.min.js"></script>
+    <script src="vendor/segment-display.js"></script>
     <script>if (window.module) module = window.module;</script>
   </head>
   <body>
@@ -111,6 +112,9 @@
       <div class="ui middle aligned two column centered grid">
         <!-- Countdown -->
         <div class="four column centered row">
+          <canvas id="sb-countdown-canvas" width="260" height="140">
+            Your browser is unfortunately not supported.
+          </canvas>
           <div class="center aligned column" id="sb-countdown">
             Loading...
           </div>

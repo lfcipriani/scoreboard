@@ -5,6 +5,19 @@ const GameState = require("../lib/gameState")
 
 $(() => {
   let settings = new Settings(remote.getGlobal("settingsPath"))
+  let displayCountdown = new SegmentDisplay("sb-countdown-canvas");
+  displayCountdown.pattern         = "###:##:##"
+  displayCountdown.displayAngle    = 6
+  displayCountdown.digitHeight     = 20
+  displayCountdown.digitWidth      = 14
+  displayCountdown.digitDistance   = 2.5
+  displayCountdown.segmentWidth    = 2
+  displayCountdown.segmentDistance = 0.3
+  displayCountdown.segmentCount    = 7
+  displayCountdown.cornerType      = 3
+  displayCountdown.colorOn         = "#e95d0f"
+  displayCountdown.colorOff        = "#4b1e05"
+  displayCountdown.draw()
 
   function pad (num, size){
     return ("000000000" + num).substr(-size)
@@ -32,19 +45,20 @@ $(() => {
   function scheduleStateChange (event) {
     switch (event.state) {
     case "planned":
-      $("#sb-settings-btn").find("div.label").hide()
+      displayCountdown.setValue(event.strftime("%I:%M:%S"))
       $("#sb-countdown").text(event.strftime("%I:%M:%S"))
       break
     case "ongoing":
-      $("#sb-settings-btn").find("div.label").hide()
+      displayCountdown.setValue(event.strftime("%I:%M:%S"))
       $("#sb-countdown").text(event.strftime("%I:%M:%S"))
       break
     case "finished":
-      $("#sb-settings-btn").find("div.label").hide()
+      displayCountdown.setValue("00:00:00")
       $("#sb-countdown").text("GAME OVER!")
       break
     default:
       $("#sb-settings-btn").find("div.label").show()
+      displayCountdown.setValue("00:00:00")
       $("#sb-countdown").text("NO GAME YET")
     }
   }
@@ -57,6 +71,7 @@ $(() => {
       })
   }
 
+  $("#sb-settings-btn").find("div.label").hide()
   setupSchedule(settings, $("#sb-countdown"), scheduleStateChange)
   setupTeams(settings)
 
@@ -152,6 +167,7 @@ $(() => {
       )
       setupSchedule(settings, $("#sb-countdown"), scheduleStateChange)
       setupTeams(settings)
+      $("#sb-settings-btn").find("div.label").hide()
       $(".ui.sidebar").sidebar("hide")
     }
   })
