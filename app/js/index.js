@@ -11,23 +11,30 @@ $(() => {
   let settings = new Settings(remote.getGlobal("settingsPath"))
   let game     = null
 
-  let displayCountdown = new SegmentDisplay("sb-countdown-canvas")
-  displayCountdown.pattern         = "###:##:##"
-  displayCountdown.displayAngle    = 6
-  displayCountdown.digitHeight     = 20
-  displayCountdown.digitWidth      = 14
-  displayCountdown.digitDistance   = 2.5
-  displayCountdown.segmentWidth    = 2
-  displayCountdown.segmentDistance = 0.3
-  displayCountdown.segmentCount    = 7
-  displayCountdown.cornerType      = 3
-  displayCountdown.colorOn         = "#e95d0f"
-  displayCountdown.colorOff        = "#4b1e05"
-  displayCountdown.draw()
-
+  // utilities
   function pad (num, size){
     return ("000000000" + num).substr(-size)
   }
+
+  // setup initial UI
+  function sevenSegment (element, pattern, colorOn, colorOff, opt = {}) {
+    let disp = new SegmentDisplay(element)
+    disp.pattern         = pattern //"###:##:##"
+    disp.displayAngle    = opt.displayAngle || 6
+    disp.digitHeight     = opt.digitHeight || 20
+    disp.digitWidth      = opt.digitWidth || 14
+    disp.digitDistance   = opt.digitDistance || 2.5
+    disp.segmentWidth    = opt.segmentWidth || 2
+    disp.segmentDistance = opt.segmentDistance || 0.3
+    disp.segmentCount    = opt.segmentCount || 7 //7, 14 or 16
+    disp.cornerType      = 3
+    disp.colorOn         = colorOn //"#e95d0f"
+    disp.colorOff        = colorOff //"#4b1e05"
+    return disp
+  }
+
+  let displayCountdown = sevenSegment("sb-countdown-canvas", "##:##:##", "#e95d0f", "#4b1e05")
+  displayCountdown.draw()
 
   function setupGame (settings, jqElement, onStateChange) {
     $("#sb-settings-btn").find("div.label").hide()
@@ -56,6 +63,26 @@ $(() => {
       })
   }
 
+  function setupActionsAndScores () {
+    let teams = ["a", "b"]
+    for (let t of teams) {
+      let teamScore = new Score(`score_${t}`, 0)
+      game.addScore(teamScore)
+      for (let i = 1; i <= 3; i++) {
+        let teamAction = new Action(`points_${t}_${i}`, i)
+        $(`#sb-team-${t}-action-${i}`).click(
+          () => teamAction.trigger()
+        )
+        teamAction.addSubscriber(teamScore)
+      }
+      teamScore.onRender((value) => {
+        game.save()
+        $(`#sb-team-${t}-score-total`).text(value)
+      })
+    }
+    game.load()
+  }
+
   function scheduleStateChange (event) {
     switch (event.state) {
     case "planned":
@@ -77,28 +104,10 @@ $(() => {
     }
   }
 
-  function setupActionsAndScores () {
-    let teams = ["a", "b"]
-    for (let t of teams) {
-      let teamScore = new Score(`score_${t}`, 0)
-      game.addScore(teamScore)
-      for (let i = 1; i <= 3; i++) {
-        let teamAction = new Action(`points_${t}_${i}`, i)
-        $(`#sb-team-${t}-action-${i}`).click(
-          () => teamAction.trigger()
-        )
-        teamAction.addSubscriber(teamScore)
-      }
-      teamScore.onRender((value) => {
-        game.save()
-        $(`#sb-team-${t}-score-total`).text(value)
-      })
-    }
-    game.load()
-  }
-
+  // setup game
   setupGame(settings, $("#sb-countdown"), scheduleStateChange)
 
+  // setup settings
   $("#sb-settings-schedule-start").calendar({
     minDate: new Date(),
     endCalendar: $("#sb-settings-schedule-end"),
@@ -178,8 +187,9 @@ $(() => {
         validation.get("#sb-settings-schedule-start input"),
         validation.get("#sb-settings-schedule-end input")
       )
+      await game.reset()
       setupGame(settings, $("#sb-countdown"), scheduleStateChange)
-      $("#testing-images").attr("src", `file:///${$("#sb-settings-team-b-logo").val()}`)
+      //TODO: load images $("#testing-images").attr("src", `file:///${$("#sb-settings-team-b-logo").val()}`)
       $(".ui.sidebar").sidebar("hide")
     }
   })
