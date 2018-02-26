@@ -11,6 +11,8 @@ const BrowserWindow = electron.BrowserWindow
 let mainWindow
 global.settingsPath = path.join(app.getPath("appData"),
   "scoreboard", process.env.SCOREBOARD_DB_SETTINGS)
+global.gamePath = path.join(app.getPath("appData"),
+  "scoreboard", process.env.SCOREBOARD_DB_GAME)
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 1000, height: 700})

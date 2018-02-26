@@ -2,12 +2,15 @@
 
 const remote = require("electron").remote
 const ipc = require("electron").ipcRenderer
-const Score = require("../lib/score")
 const Settings = require("../lib/settings")
 const Game = require("../lib/game")
+const Score = require("../lib/score")
+const Action = require("../lib/action")
 
 $(() => {
   let settings = new Settings(remote.getGlobal("settingsPath"))
+  let game     = null
+
   let displayCountdown = new SegmentDisplay("sb-countdown-canvas")
   displayCountdown.pattern         = "###:##:##"
   displayCountdown.displayAngle    = 6
@@ -26,10 +29,12 @@ $(() => {
     return ("000000000" + num).substr(-size)
   }
 
-  function setupSchedule (settings, jqElement, onStateChange) {
+  function setupGame (settings, jqElement, onStateChange) {
     settings.schedule()
       .then((s) => {
-        let now = new Game(s).currentState()
+        game = new Game(s, remote.getGlobal("gamePath"))
+        setupActionsAndScores()
+        let now = game.currentState()
         if (now.state === "not_configured" || now.state === "finished") {
           onStateChange({state: now.state})
         } else {
@@ -39,9 +44,14 @@ $(() => {
               onStateChange(event)
             })
             .on("finish.countdown", () => {
-              setupSchedule(settings, jqElement, onStateChange)
+              setupGame(settings, jqElement, onStateChange)
             })
         }
+      })
+    settings.teams()
+      .then((t) => {
+        $("#sb-team-a-name").text(t.teamA.name)
+        $("#sb-team-b-name").text(t.teamB.name)
       })
   }
 
@@ -66,28 +76,28 @@ $(() => {
     }
   }
 
-  function setupTeams (settings) {
-    settings.teams()
-      .then((t) => {
-        $("#sb-team-a-name").text(t.teamA.name)
-        $("#sb-team-b-name").text(t.teamB.name)
+  function setupActionsAndScores () {
+    let teams = ["a", "b"]
+    for (let t of teams) {
+      let teamScore = new Score(`score_${t}`, 0)
+      game.addScore(teamScore)
+      for (let i = 1; i <= 3; i++) {
+        let teamAction = new Action(`points_${t}_${i}`, i)
+        $(`#sb-team-${t}-action-${i}`).click(
+          () => teamAction.trigger()
+        )
+        teamAction.addSubscriber(teamScore)
+      }
+      teamScore.onRender((value) => {
+        game.save()
+        $(`#sb-team-${t}-score-total`).text(value)
       })
+    }
+    game.load()
   }
 
   $("#sb-settings-btn").find("div.label").hide()
-  setupSchedule(settings, $("#sb-countdown"), scheduleStateChange)
-  setupTeams(settings)
-
-  let teams = ["a", "b"]
-
-  for (let t of teams) {
-    let teamScore = new Score($(`#sb-team-${t}-score-total`))
-    for (let i = 1; i <= 3; i++) {
-      $(`#sb-team-${t}-action-${i}`).click(
-        () => teamScore.doIt(i)
-      )
-    }
-  }
+  setupGame(settings, $("#sb-countdown"), scheduleStateChange)
 
   $("#sb-settings-schedule-start").calendar({
     minDate: new Date(),
@@ -168,8 +178,7 @@ $(() => {
         validation.get("#sb-settings-schedule-start input"),
         validation.get("#sb-settings-schedule-end input")
       )
-      setupSchedule(settings, $("#sb-countdown"), scheduleStateChange)
-      setupTeams(settings)
+      setupGame(settings, $("#sb-countdown"), scheduleStateChange)
       $("#testing-images").attr("src", `file:///${$("#sb-settings-team-b-logo").val()}`)
       $("#sb-settings-btn").find("div.label").hide()
       $(".ui.sidebar").sidebar("hide")
