@@ -4,7 +4,7 @@ const remote = require("electron").remote
 const ipc = require("electron").ipcRenderer
 const Score = require("../lib/score")
 const Settings = require("../lib/settings")
-const GameState = require("../lib/gameState")
+const Game = require("../lib/game")
 
 $(() => {
   let settings = new Settings(remote.getGlobal("settingsPath"))
@@ -29,7 +29,7 @@ $(() => {
   function setupSchedule (settings, jqElement, onStateChange) {
     settings.schedule()
       .then((s) => {
-        let now = new GameState(s).current()
+        let now = new Game(s).currentState()
         if (now.state === "not_configured" || now.state === "finished") {
           onStateChange({state: now.state})
         } else {
