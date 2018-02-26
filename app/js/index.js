@@ -30,6 +30,7 @@ $(() => {
   }
 
   function setupGame (settings, jqElement, onStateChange) {
+    $("#sb-settings-btn").find("div.label").hide()
     settings.schedule()
       .then((s) => {
         game = new Game(s, remote.getGlobal("gamePath"))
@@ -96,7 +97,6 @@ $(() => {
     game.load()
   }
 
-  $("#sb-settings-btn").find("div.label").hide()
   setupGame(settings, $("#sb-countdown"), scheduleStateChange)
 
   $("#sb-settings-schedule-start").calendar({
@@ -180,7 +180,6 @@ $(() => {
       )
       setupGame(settings, $("#sb-countdown"), scheduleStateChange)
       $("#testing-images").attr("src", `file:///${$("#sb-settings-team-b-logo").val()}`)
-      $("#sb-settings-btn").find("div.label").hide()
       $(".ui.sidebar").sidebar("hide")
     }
   })
