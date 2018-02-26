@@ -1,42 +1,42 @@
 const Score = require("../lib/score")
 
-let jqElement = {
-  text (v) {
-    return v
-  }
-}
-
 describe("Score", () => {
 
-  it("mocks jquery element for testing", () => {
-    expect(jqElement.text(3)).toBe(3)
-  })
-
   it("should return zero as default initial value", () => {
-    let score = new Score(jqElement)
+    let score = new Score("total")
 
+    expect(score.name).toBe("total")
     expect(score.value).toBe(0)
   })
 
-  it("should increment point properly", () => {
-    let score = new Score(jqElement)
+  it("should return the value if an initial value is provided", () => {
+    let score = new Score("total", 42)
 
-    score.doIt(1)
-    expect(score.value).toBe(1)
-    score.doIt(2)
-    expect(score.value).toBe(3)
-    score.doIt(3)
-    expect(score.value).toBe(6)
+    expect(score.name).toBe("total")
+    expect(score.value).toBe(42)
   })
 
-  it("should decrement point properly", () => {
-    let score = new Score(jqElement)
+  it("should update value", () => {
+    let score = new Score("total")
 
-    score.doIt(6)
-    expect(score.value).toBe(6)
-    score.undo(3)
+    score.update(3)
     expect(score.value).toBe(3)
-    score.undo(2)
-    expect(score.value).toBe(1)
   })
+
+  it("should update value negatively", () => {
+    let score = new Score("total", 42)
+
+    score.update(-5)
+    expect(score.value).toBe(37)
+  })
+
+  it("will trigger render if callback is assigned", () => {
+    let score = new Score("total")
+
+    score.onRender((value) => {
+      expect(value).toBe(3)
+    })
+    score.update(3)
+  })
+
 })
