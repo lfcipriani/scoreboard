@@ -5,7 +5,8 @@ tist:
 setup:
 	@npm install yarn -g && \
 	yarn install && \
-	make test && \
+	cp -vip .env.sample .env && \
+	make tist && \
 	echo "Everything is fine. You can run 'make start' to start the app."
 
 start:
