@@ -8,6 +8,8 @@ const Score = require("../lib/score")
 const Action = require("../lib/action")
 
 $(() => {
+  $("#sb-loading").toggleClass("active", true)
+
   let settings = new Settings(remote.getGlobal("settingsPath"))
   let game     = null
 
@@ -71,6 +73,7 @@ $(() => {
               setupGame(settings, jqElement, onStateChange)
             })
         }
+        $("#sb-loading").toggleClass("active", false)
       })
     settings.teams()
       .then((t) => {
@@ -204,6 +207,7 @@ $(() => {
           },
           onApprove: async () => {
             if ($("#sb-password-input").val() === remote.getGlobal("settingsPassword")) {
+              $("#sb-loading").toggleClass("active", true)
               await settings.setTeams({
                 teamA: { name: validation.get("#sb-settings-team-a-name"), logo: validation.get("#sb-settings-team-a-logo") },
                 teamB: { name: validation.get("#sb-settings-team-b-name"), logo: validation.get("#sb-settings-team-b-logo") }
@@ -218,7 +222,6 @@ $(() => {
               showMessage("Let the new game begin!", "positive")
             } else {
               showMessage("Wrong password!", "negative")
-              // wrong password
             }
           }
         })
