@@ -16,7 +16,10 @@ global.gamePath = path.join(app.getPath("appData"),
 global.settingsPassword = process.env.SCOREBOARD_SETTINGS_PASSWORD
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 1000, height: 700})
+  mainWindow = new BrowserWindow({
+    width: 1120,
+    height: 700
+  })
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, "app/index.html"),
