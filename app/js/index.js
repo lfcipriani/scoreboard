@@ -14,8 +14,8 @@ $(() => {
   let game     = null
 
   // utilities
-  function pad (num, size){
-    return ("000000000" + num).substr(-size)
+  function pad (num, size, base = "000000000"){
+    return (base + num).substr(-size)
   }
 
   // setup initial UI
@@ -51,8 +51,14 @@ $(() => {
       })
   }
 
-  let displayCountdown = sevenSegment("sb-countdown-canvas", "##:##:##", "#e95d0f", "#4b1e05")
+  let displayCountdown = sevenSegment("sb-countdown-canvas", "##:##:##", "#e95d0f", "#4b1e05")//"#401900")
   displayCountdown.draw()
+  let displayScores = {
+    teama: sevenSegment("sb-team-a-score-total", "####", "#e95d0f", "#4b1e05"),
+    teamb: sevenSegment("sb-team-b-score-total", "####", "#e95d0f", "#4b1e05")
+  }
+  displayScores["teama"].draw()
+  displayScores["teamb"].draw()
 
   function setupGame (settings, jqElement, onStateChange) {
     $("#sb-settings-btn").find("div.label").hide()
@@ -96,7 +102,7 @@ $(() => {
       }
       teamScore.onRender((value) => {
         game.save()
-        $(`#sb-team-${t}-score-total`).text(value)
+        displayScores[`team${t}`].setValue(`${pad(value, 4, "    ")}`)
       })
     }
     game.load()

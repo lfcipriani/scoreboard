@@ -18,6 +18,16 @@
   margin-top: 10px;
 }
 
+.sb-digits-container {
+  border: 4px solid #c3c2c2;
+  padding: 4px 20px;
+  background-color: rgb(36, 30, 30);/*rgb(13, 15, 16); */
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; /* future proofing */
+  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+}
+
 #sb-message {
     position: absolute;
     z-index: 101;

@@ -138,12 +138,9 @@
         <div class="three wide column"></div>
         <!-- Countdown -->
         <div class="ten wide center aligned column">
-          <canvas id="sb-countdown-canvas" width="400" height="100">
+          <canvas id="sb-countdown-canvas" class="sb-digits-container" width="250" height="80">
             Your browser is unfortunately not supported.
           </canvas>
-          <div class="center aligned column" id="sb-countdown">
-            Loading...
-          </div>
         </div>
         <!-- Header icons -->
         <div class="three wide right aligned column">
@@ -155,18 +152,17 @@
 
 
       <!-- Second row -->
+      <div class="middle aligned row">
         <!-- Logo team A -->
         <div class="three wide right aligned column">
         </div>
         <!-- Score and name team A -->
         <div class="four wide right aligned column">
-          <div class="ui orange statistic">
-            <div class="value" id="sb-team-a-score-total">
-              1489
-            </div>
-            <div class="label" id="sb-team-a-name">
-              Laranja
-            </div>
+          <canvas id="sb-team-a-score-total" class="sb-digits-container" width="200" height="100">
+            Your browser is unfortunately not supported.
+          </canvas>
+          <div class="label" id="sb-team-a-name">
+            Team A
           </div>
         </div>
         <!-- Middle - -->
@@ -175,18 +171,17 @@
         </div>
         <!-- Score and name team B -->
         <div class="four wide column">
-          <div class="ui green statistic">
-            <div class="value" id="sb-team-b-score-total">
-              2048
-            </div>
-            <div class="label" id="sb-team-b-name">
-              Verde
-            </div>
+          <canvas id="sb-team-b-score-total" class="sb-digits-container" width="200" height="100">
+            Your browser is unfortunately not supported.
+          </canvas>
+          <div class="label" id="sb-team-b-name">
+            Team B
           </div>
         </div>
         <!-- Logo team B -->
         <div class="three wide column">
         </div>
+      </div>
 
       <!-- Third row -->
         <!-- Action buttons team A -->
@@ -203,7 +198,10 @@
         </div>
         <!-- Center Panel -->
         <div class="four wide center aligned column">
-          <p>Logo here</p>
+          <img class="ui fluid image" src="assets/eventLogo.png">
+          <p class="center aligned" id="sb-countdown">
+            Loading...
+          </p>
         </div>
         <!-- Action buttons team B -->
         <div class="six wide column">
