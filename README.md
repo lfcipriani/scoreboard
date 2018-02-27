@@ -7,9 +7,9 @@ Look, it's me again build scoreboards
 
 # Tests
 
-    $ make test
+    $ make
 
-Will run eslint and jasmine tests.
+Will run eslint (`make lint`) and jasmine tests (`make test`).
 
 # Run
 
