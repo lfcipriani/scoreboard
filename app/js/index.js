@@ -96,7 +96,10 @@ $(() => {
       for (let i = 1; i <= 3; i++) {
         let teamAction = new Action(`points_${t}_${i}`, i)
         $(`#sb-team-${t}-action-${i}`).click(
-          () => teamAction.trigger()
+          () => {
+            $(`#sb-team-${t}-action-${i}`).transition("pulse",250)
+            teamAction.trigger()
+          }
         )
         teamAction.addSubscriber(teamScore)
       }

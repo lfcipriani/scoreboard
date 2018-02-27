@@ -2,8 +2,51 @@
   padding: 20px;
 }
 
-.sb-action-text {
-  font-size: 30pt;
+.sb-team-name {
+  text-align: center;
+  font-size: 25px;
+  margin: 5px;
+}
+
+.sb-big-X {
+  font-size: 60px;
+}
+
+.sb-right {
+  float: right;
+}
+
+.sb-left {
+  float: left;
+}
+
+.sb-1 {
+  margin-top: 125px;
+}
+.sb-2 {
+  margin-top: 50px;
+}
+.sb-3 {
+  margin-top: 0px;
+}
+
+.sb-action-btn-text {
+  font-size: 60px;
+  text-align: center;
+  color: #ebff5b;
+  text-shadow: 4px 4px 5px #000;
+  cursor: pointer;
+  -webkit-user-select: none;
+}
+
+.sb-action-btn {
+  display: block;
+  opacity: 0.8;
+  width: 100px;
+  height: 100px;
+  background: url(../assets/basketball.svg);
+  background-size: 100px 100px;
+  cursor: pointer;
 }
 
 .sb-labelled {
