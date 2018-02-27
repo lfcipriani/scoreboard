@@ -13,6 +13,7 @@ global.settingsPath = path.join(app.getPath("appData"),
   "scoreboard", process.env.SCOREBOARD_DB_SETTINGS)
 global.gamePath = path.join(app.getPath("appData"),
   "scoreboard", process.env.SCOREBOARD_DB_GAME)
+global.settingsPassword = process.env.SCOREBOARD_SETTINGS_PASSWORD
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 1000, height: 700})

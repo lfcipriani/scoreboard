@@ -17,3 +17,13 @@
 .sb-settings-panel .form {
   margin-top: 10px;
 }
+
+#sb-message {
+    position: absolute;
+    z-index: 101;
+    top: 10px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    overflow: hidden;
+}

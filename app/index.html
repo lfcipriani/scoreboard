@@ -104,6 +104,27 @@
     <!-- Main content -->
     <div class="dimmed pusher">
 
+      <div class="ui hidden message" id="sb-message">
+        <p>messages appear here</p>
+      </div>
+
+      <!-- Reset password check modal -->
+      <div class="ui mini modal" id="sb-password-modal">
+        <div class="header">Reset Protection</div>
+        <div class="content">
+          <p>You are about to reset the game. If you are sure about that please type the password:</p>
+          <div class="ui left icon input">
+            <input placeholder="Password..." type="password" id="sb-password-input">
+            <i class="key icon"></i>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui approve red button">Reset!</div>
+          <div class="ui cancel button">Cancel</div>
+        </div>
+      </div>
+
+      <!-- Header icons -->
       <div class="ui one column grid">
         <div class="row">
           <div class="right aligned column">

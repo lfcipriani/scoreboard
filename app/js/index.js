@@ -33,6 +33,22 @@ $(() => {
     return disp
   }
 
+  function showMessage(msg, type = "positive") {
+    $("#sb-message p").text(msg)
+    $("#sb-message")
+      .toggleClass(type, true)
+      .transition({
+        animation: "fade"
+      })
+      .transition({
+        animation: "fade",
+        interval: 5000,
+        onComplete: () => {
+          $("#sb-message").toggleClass(type, false)
+        }
+      })
+  }
+
   let displayCountdown = sevenSegment("sb-countdown-canvas", "##:##:##", "#e95d0f", "#4b1e05")
   displayCountdown.draw()
 
@@ -158,7 +174,7 @@ $(() => {
     $(".ui.sidebar").sidebar("show")
   })
 
-  $("#sb-settings-restart-btn").click(async () => {
+  $("#sb-settings-restart-btn").click(() => {
     let validation = new Map()
     validation.set("#sb-settings-team-a-name", $("#sb-settings-team-a-name").val())
     validation.set("#sb-settings-team-b-name", $("#sb-settings-team-b-name").val())
@@ -178,18 +194,36 @@ $(() => {
     }
 
     if (valid) {
-      let teams = {
-        teamA: { name: validation.get("#sb-settings-team-a-name"), logo: validation.get("#sb-settings-team-a-logo") },
-        teamB: { name: validation.get("#sb-settings-team-b-name"), logo: validation.get("#sb-settings-team-b-logo") }
-      }
-      await settings.setTeams(teams)
-      await settings.setSchedule(
-        validation.get("#sb-settings-schedule-start input"),
-        validation.get("#sb-settings-schedule-end input")
-      )
-      await game.reset()
-      setupGame(settings, $("#sb-countdown"), scheduleStateChange)
-      //TODO: load images $("#testing-images").attr("src", `file:///${$("#sb-settings-team-b-logo").val()}`)
+      $("#sb-password-input").val("")
+      $("#sb-password-modal")
+        .modal({
+          centered: false,
+          closable: false,
+          onDeny: () => {
+            // cancel
+          },
+          onApprove: async () => {
+            if ($("#sb-password-input").val() === remote.getGlobal("settingsPassword")) {
+              await settings.setTeams({
+                teamA: { name: validation.get("#sb-settings-team-a-name"), logo: validation.get("#sb-settings-team-a-logo") },
+                teamB: { name: validation.get("#sb-settings-team-b-name"), logo: validation.get("#sb-settings-team-b-logo") }
+              })
+              await settings.setSchedule(
+                validation.get("#sb-settings-schedule-start input"),
+                validation.get("#sb-settings-schedule-end input")
+              )
+              await game.reset()
+              setupGame(settings, $("#sb-countdown"), scheduleStateChange)
+              //TODO: load images $("#testing-images").attr("src", `file:///${$("#sb-settings-team-b-logo").val()}`)
+              showMessage("Let the new game begin!", "positive")
+            } else {
+              showMessage("Wrong password!", "negative")
+              // wrong password
+            }
+          }
+        })
+        .modal("show")
+
       $(".ui.sidebar").sidebar("hide")
     }
   })
