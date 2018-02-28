@@ -6,7 +6,15 @@
   "scripts": {
     "start": "electron .",
     "lint": "./node_modules/.bin/eslint main.js app/ lib/ spec/",
-    "test": "jasmine"
+    "test": "jasmine",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.talleye.scoreboard",
+    "win": {
+      "icon": "./build/ballWindows.ico"
+    }
   },
   "repository": "https://github.com/lfcipriani/scoreboard",
   "author": {
