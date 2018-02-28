@@ -7,6 +7,7 @@ const dialog = require("electron").dialog
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
+const Menu = electron.Menu
 
 let mainWindow
 global.settingsPath = path.join(app.getPath("appData"),
@@ -15,12 +16,97 @@ global.gamePath = path.join(app.getPath("appData"),
   "scoreboard", process.env.SCOREBOARD_DB_GAME)
 global.settingsPassword = process.env.SCOREBOARD_SETTINGS_PASSWORD
 
+let template = [{
+  label: "Sobre",
+  submenu: [{
+    label: "Código-fonte",
+    click: () => {
+      electron.shell.openExternal("https://github.com/lfcipriani/scoreboard")
+    }
+  }, {
+    type: "separator"
+  }, {
+    label: "Rap da Maratona",
+    click: () => {
+      electron.shell.openExternal("https://soundcloud.com/lfcipriani/rap-da-maratona")
+    }
+  }, {
+    label: "Concurso 3 pontos - Xylophone",
+    click: () => {
+      electron.shell.openExternal("https://soundcloud.com/lfcipriani/3pointcontest-xylophone")
+    }
+  }, {
+    label: "Concurso 3 pontos - Coolbeat",
+    click: () => {
+      electron.shell.openExternal("https://soundcloud.com/lfcipriani/3pointcontest-coolbeat")
+    }
+  }]
+  }, {
+    label: "Window",
+    role: "window",
+    submenu: [{
+      label: "Minimize",
+      accelerator: "CmdOrCtrl+M",
+      role: "minimize"
+    }, {
+      label: "Close",
+      accelerator: "CmdOrCtrl+W",
+      role: "close"
+    }, {
+      type: "separator"
+    }, {
+      label: "Reopen Window",
+      accelerator: "CmdOrCtrl+Shift+T",
+      enabled: false,
+      key: "reopenMenuItem",
+      click: function () {
+        app.emit("activate")
+      }
+    },{
+      type: "separator"
+    },{
+      label: "Reload",
+      accelerator: "CmdOrCtrl+R",
+      click: function (item, focusedWindow) {
+        if (focusedWindow) {
+          // on reload, start fresh and close any old
+          // open secondary windows
+          if (focusedWindow.id === 1) {
+            BrowserWindow.getAllWindows().forEach(function (win) {
+              if (win.id > 1) {
+                win.close()
+              }
+            })
+          }
+          focusedWindow.reload()
+        }
+      }
+    },{
+      label: 'Toggle Developer Tools',
+      accelerator: (function () {
+        if (process.platform === 'darwin') {
+          return 'Alt+Command+I'
+        } else {
+          return 'Ctrl+Shift+I'
+        }
+      })(),
+      click: function (item, focusedWindow) {
+        if (focusedWindow) {
+          focusedWindow.toggleDevTools()
+        }
+      }
+    }]
+}]
+
 function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1120,
-    height: 700,
+    height: 720,
     icon: path.join(__dirname, "app/assets/icons/bballicon.png")
   })
+
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, "app/index.html"),
@@ -51,22 +137,3 @@ ipc.on("open-file-dialog", function (event, element) {
     if (files) event.sender.send("selected-file", { files: files, element: element})
   })
 })
-
-// app.on("window-all-closed", function () {
-//   // On OS X it is common for applications and their menu bar
-//   // to stay active until the user quits explicitly with Cmd + Q
-//   if (process.platform !== "darwin") {
-//     app.quit()
-//   }
-// })
-//
-// app.on("activate", function () {
-//   // On OS X it's common to re-create a window in the app when the
-//   // dock icon is clicked and there are no other windows open.
-//   if (mainWindow === null) {
-//     createWindow()
-//   }
-// })
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
