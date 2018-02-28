@@ -44,7 +44,7 @@ $(() => {
       })
       .transition({
         animation: "fade",
-        interval: 5000,
+        interval: 3000,
         onComplete: () => {
           $("#sb-message").toggleClass(type, false)
         }
@@ -125,25 +125,21 @@ $(() => {
     switch (event.state) {
     case "planned":
       displayCountdown.setValue(event.strftime("%I:%M:%S"))
-      $("#sb-countdown").text(event.strftime("%I:%M:%S"))
       break
     case "ongoing":
       displayCountdown.setValue(event.strftime("%I:%M:%S"))
-      $("#sb-countdown").text(event.strftime("%I:%M:%S"))
       break
     case "finished":
       displayCountdown.setValue("00:00:00")
-      $("#sb-countdown").text("GAME OVER!")
       break
     default:
       $("#sb-settings-btn").find("div.label").show()
       displayCountdown.setValue("00:00:00")
-      $("#sb-countdown").text("NO GAME YET")
     }
   }
 
   // setup game
-  setupGame(settings, $("#sb-countdown"), scheduleStateChange)
+  setupGame(settings, $("#sb-countdown-canvas"), scheduleStateChange)
 
   // setup settings
   $("#sb-settings-schedule-start").calendar({
@@ -235,11 +231,11 @@ $(() => {
                 validation.get("#sb-settings-schedule-end input")
               )
               await game.reset()
-              setupGame(settings, $("#sb-countdown"), scheduleStateChange)
+              setupGame(settings, $("#sb-countdown-canvas"), scheduleStateChange)
               //TODO: load images $("#testing-images").attr("src", `file:///${$("#sb-settings-team-b-logo").val()}`)
-              showMessage("Let the new game begin!", "positive")
+              showMessage("Que comece a partida!!!", "positive")
             } else {
-              showMessage("Wrong password!", "negative")
+              showMessage("Senha incorreta! Pergunte ao Júlio.", "negative")
             }
           }
         })

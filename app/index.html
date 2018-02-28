@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Scoreboard</title>
+    <title>Maratona de Basquete</title>
     <link rel="stylesheet" type="text/css" href="vendor/semantic.slate.min.css">
     <link rel="stylesheet" type="text/css" href="vendor/calendar.min.css">
     <link rel="stylesheet" type="text/css" href="css/app.css">
@@ -23,33 +23,33 @@
 
           <!-- Team settings -->
           <div class="ui raised segment">
-            <a class="ui blue ribbon label">Teams</a>
-            <span>Add team details</span>
+            <a class="ui blue ribbon label">Times</a>
+            <span>Adicione os detalhes</span>
             <div class="ui tiny form">
-              <h4 class="ui dividing header">Team A</h4>
+              <h4 class="ui dividing header">Time A</h4>
               <div class="two fields">
                 <div class="field">
-                  <label>Name</label>
+                  <label>Nome</label>
                   <input id="sb-settings-team-a-name" placeholder="Nicks" type="text">
                 </div>
                 <div class="field">
                   <label>Logo</label>
                   <div class="ui action input">
-                    <input id="sb-settings-team-a-logo" placeholder="Open..." type="text">
+                    <input id="sb-settings-team-a-logo" placeholder="Abrir..." type="text">
                     <button id="sb-settings-team-a-logo-btn" class="ui tiny icon button"><i class="folder open icon"></i></button>
                   </div>
                 </div>
               </div>
-              <h4 class="ui dividing header">Team B</h4>
+              <h4 class="ui dividing header">Time B</h4>
               <div class="two fields">
                 <div class="field">
-                  <label>Name</label>
+                  <label>Nome</label>
                   <input id="sb-settings-team-b-name" placeholder="Cavaliers" type="text">
                 </div>
                 <div class="field">
                   <label>Logo</label>
                   <div class="ui action input">
-                    <input id="sb-settings-team-b-logo" placeholder="Open..." type="text">
+                    <input id="sb-settings-team-b-logo" placeholder="Abrir..." type="text">
                     <button id="sb-settings-team-b-logo-btn" class="ui tiny icon button"><i class="folder open icon"></i></button>
                   </div>
                 </div>
@@ -59,24 +59,24 @@
 
           <!-- Schedule settings -->
           <div class="ui raised segment">
-            <a class="ui blue ribbon label">Schedule</a>
-            <span>Set game start and end</span>
+            <a class="ui blue ribbon label">Data e Hora</a>
+            <span>Selecione início e fim</span>
             <div class="ui tiny form">
               <div class="field">
-                <label>Start</label>
+                <label>Início</label>
                 <div class="ui calendar" id="sb-settings-schedule-start">
                   <div class="ui input left icon">
                     <i class="calendar icon"></i>
-                    <input type="text" placeholder="Date/Time">
+                    <input type="text" placeholder="Data/hora">
                   </div>
                 </div>
               </div>
               <div class="field">
-                <label>End</label>
+                <label>Fim</label>
                 <div class="ui calendar" id="sb-settings-schedule-end">
                   <div class="ui input left icon">
                     <i class="calendar icon"></i>
-                    <input type="text" placeholder="Date/Time">
+                    <input type="text" placeholder="Data/hora">
                   </div>
                 </div>
               </div>
@@ -88,10 +88,10 @@
             <div class="ui two column grid">
               <div class="row">
                 <div class="column">
-                  <button class="fluid ui small red button" id="sb-settings-restart-btn">Restart</button>
+                  <button class="fluid ui small red button" id="sb-settings-restart-btn">Reiniciar</button>
                 </div>
                 <div class="column">
-                  <button class="fluid ui small button" id="sb-settings-cancel-btn">Cancel</button>
+                  <button class="fluid ui small button" id="sb-settings-cancel-btn">Cancelar</button>
                 </div>
               </div>
             </div>
@@ -116,17 +116,17 @@
 
       <!-- Reset password check modal -->
       <div class="ui mini modal sb-modal" id="sb-password-modal">
-        <div class="header">Reset Protection</div>
+        <div class="header">Proteção de Reset</div>
         <div class="content">
-          <p>You are about to reset the game. If you are sure about that please type the password:</p>
+          <p>Você irá reiniciar a partida e zerar o placar. Se você está certo disso entre com a senha:</p>
           <div class="ui left icon input">
-            <input placeholder="Password..." type="password" id="sb-password-input">
+            <input placeholder="Senha..." type="password" id="sb-password-input">
             <i class="key icon"></i>
           </div>
         </div>
         <div class="actions">
-          <div class="ui approve red button">Reset!</div>
-          <div class="ui cancel button">Cancel</div>
+          <div class="ui approve red button">Reiniciar!</div>
+          <div class="ui cancel button">Cancelar</div>
         </div>
       </div>
 
@@ -227,9 +227,6 @@
         <!-- Center Panel -->
         <div class="four wide center aligned column">
           <img class="ui fluid image" src="assets/eventLogo.png">
-          <p class="center aligned" id="sb-countdown">
-            Loading...
-          </p>
         </div>
         <!-- Action buttons team B -->
         <div class="six wide column">
