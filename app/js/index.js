@@ -87,6 +87,11 @@ $(() => {
         $("#sb-undo-team-a").text(t.teamA.name)
         $("#sb-team-b-name").text(t.teamB.name)
         $("#sb-undo-team-b").text(t.teamB.name)
+
+        let logo = t.teamA.logo ? `file:///${t.teamA.logo}` : "assets/greenjersey.png"
+        $("#sb-team-a-logo").attr("src", logo)
+        logo = t.teamB.logo ? `file:///${t.teamB.logo}` : "assets/redjersey.png"
+        $("#sb-team-b-logo").attr("src", logo)
       })
   }
 
@@ -208,8 +213,6 @@ $(() => {
     let validation = new Map()
     validation.set("#sb-settings-team-a-name", $("#sb-settings-team-a-name").val())
     validation.set("#sb-settings-team-b-name", $("#sb-settings-team-b-name").val())
-    // validation.set("#sb-settings-team-a-logo", $("#sb-settings-team-a-logo").val())
-    // validation.set("#sb-settings-team-b-logo", $("#sb-settings-team-b-logo").val())
     validation.set("#sb-settings-schedule-start input", $("#sb-settings-schedule-start input").val())
     validation.set("#sb-settings-schedule-end input", $("#sb-settings-schedule-end input").val())
 
@@ -222,6 +225,9 @@ $(() => {
         $(key).parents("div.field").toggleClass("error", false)
       }
     }
+
+    validation.set("#sb-settings-team-a-logo", $("#sb-settings-team-a-logo").val() || null)
+    validation.set("#sb-settings-team-b-logo", $("#sb-settings-team-b-logo").val() || null)
 
     if (valid) {
       $("#sb-password-input").val("")
@@ -244,7 +250,6 @@ $(() => {
               )
               await game.reset()
               setupGame(settings, $("#sb-countdown-canvas"), scheduleStateChange)
-              //TODO: load images $("#testing-images").attr("src", `file:///${$("#sb-settings-team-b-logo").val()}`)
               showMessage("Que comece a partida!!!", "positive")
             } else {
               showMessage("Senha incorreta! Pergunte ao Júlio.", "negative")
