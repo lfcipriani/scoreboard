@@ -18,7 +18,8 @@ global.settingsPassword = process.env.SCOREBOARD_SETTINGS_PASSWORD
 function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1120,
-    height: 700
+    height: 700,
+    icon: path.join(__dirname, "app/assets/icons/bballicon.png")
   })
 
   mainWindow.loadURL(url.format({
