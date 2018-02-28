@@ -1,6 +1,6 @@
 {
-  "name": "scoreboard",
-  "version": "1.0.0",
+  "name": "Maratona",
+  "version": "0.0.9",
   "description": "Scoreboard system for basketball marathons",
   "main": "main.js",
   "scripts": {
@@ -9,8 +9,11 @@
     "test": "jasmine"
   },
   "repository": "https://github.com/lfcipriani/scoreboard",
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": {
+    "name" : "Luis Cipriani",
+    "url" : "https://www.talleye.com/"
+  },
+  "license": "Apache-2.0",
   "dependencies": {
     "dotenv": "^5.0.0",
     "nedb": "^1.8.0"
