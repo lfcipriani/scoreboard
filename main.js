@@ -16,32 +16,33 @@ global.gamePath = path.join(app.getPath("appData"),
   "scoreboard", process.env.SCOREBOARD_DB_GAME)
 global.settingsPassword = process.env.SCOREBOARD_SETTINGS_PASSWORD
 
-let template = [{
-  label: "Sobre",
-  submenu: [{
-    label: "Código-fonte",
-    click: () => {
-      electron.shell.openExternal("https://github.com/lfcipriani/scoreboard")
-    }
-  }, {
-    type: "separator"
-  }, {
-    label: "Rap da Maratona",
-    click: () => {
-      electron.shell.openExternal("https://soundcloud.com/lfcipriani/rap-da-maratona")
-    }
-  }, {
-    label: "Concurso 3 pontos - Xylophone",
-    click: () => {
-      electron.shell.openExternal("https://soundcloud.com/lfcipriani/3pointcontest-xylophone")
-    }
-  }, {
-    label: "Concurso 3 pontos - Coolbeat",
-    click: () => {
-      electron.shell.openExternal("https://soundcloud.com/lfcipriani/3pointcontest-coolbeat")
-    }
-  }]
-  }, {
+let template = [
+  {
+    label: "Sobre",
+    submenu: [{
+      label: "Código-fonte",
+      click: () => {
+        electron.shell.openExternal("https://github.com/lfcipriani/scoreboard")
+      }
+    }, {
+      type: "separator"
+    }, {
+      label: "Rap da Maratona",
+      click: () => {
+        electron.shell.openExternal("https://soundcloud.com/lfcipriani/rap-da-maratona")
+      }
+    }, {
+      label: "Concurso 3 pontos - Xylophone",
+      click: () => {
+        electron.shell.openExternal("https://soundcloud.com/lfcipriani/3pointcontest-xylophone")
+      }
+    }, {
+      label: "Concurso 3 pontos - Coolbeat",
+      click: () => {
+        electron.shell.openExternal("https://soundcloud.com/lfcipriani/3pointcontest-coolbeat")
+      }
+    }]
+  },{
     label: "Janela",
     role: "window",
     submenu: [{
@@ -79,12 +80,12 @@ let template = [{
     },{
       type: "separator"
     },{
-      label: 'Toggle Developer Tools',
+      label: "Toggle Developer Tools",
       accelerator: (function () {
-        if (process.platform === 'darwin') {
-          return 'Alt+Command+I'
+        if (process.platform === "darwin") {
+          return "Alt+Command+I"
         } else {
-          return 'Ctrl+Shift+I'
+          return "Ctrl+Shift+I"
         }
       })(),
       click: function (item, focusedWindow) {
@@ -93,7 +94,7 @@ let template = [{
         }
       }
     }]
-}]
+  }]
 
 function createWindow () {
   mainWindow = new BrowserWindow({
