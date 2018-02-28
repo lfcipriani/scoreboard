@@ -84,7 +84,9 @@ $(() => {
     settings.teams()
       .then((t) => {
         $("#sb-team-a-name").text(t.teamA.name)
+        $("#sb-undo-team-a").text(t.teamA.name)
         $("#sb-team-b-name").text(t.teamB.name)
+        $("#sb-undo-team-b").text(t.teamB.name)
       })
   }
 
@@ -93,6 +95,7 @@ $(() => {
     for (let t of teams) {
       let teamScore = new Score(`score_${t}`, 0)
       game.addScore(teamScore)
+
       for (let i = 1; i <= 3; i++) {
         let teamAction = new Action(`points_${t}_${i}`, i)
         $(`#sb-team-${t}-action-${i}`).click(
@@ -101,11 +104,18 @@ $(() => {
             teamAction.trigger()
           }
         )
+        if (i === 1) {
+          // setup undo
+          $(`#sb-undo-team-${t}-plus`).click(() => teamAction.trigger())
+          $(`#sb-undo-team-${t}-minus`).click(() => teamAction.trigger(false))
+        }
         teamAction.addSubscriber(teamScore)
       }
+
       teamScore.onRender((value) => {
         game.save()
         displayScores[`team${t}`].setValue(`${pad(value, 4, "    ")}`)
+        $(`#sb-undo-team-${t}-score`).text(value)
       })
     }
     game.load()
@@ -209,7 +219,6 @@ $(() => {
       $("#sb-password-input").val("")
       $("#sb-password-modal")
         .modal({
-          centered: false,
           closable: false,
           onDeny: () => {
             // cancel
@@ -244,13 +253,22 @@ $(() => {
     $(".ui.sidebar").sidebar("hide")
   })
 
+  $("#sb-undo-btn").click(() => {
+    $("#sb-undo-modal")
+      .modal({
+        closable: false,
+        onApprove: () => {
+          // just close
+        }
+      }).modal("show")
+  })
+
   $("#sb-settings-team-a-logo-btn").click(() => {
     ipc.send("open-file-dialog", "#sb-settings-team-a-logo")
   })
   $("#sb-settings-team-b-logo-btn").click(() => {
     ipc.send("open-file-dialog", "#sb-settings-team-b-logo")
   })
-
   ipc.on("selected-file", function (event, arg) {
     $(arg.element).val(arg.files[0])
   })

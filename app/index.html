@@ -130,13 +130,37 @@
         </div>
       </div>
 
+      <!-- Undo modal -->
+      <div class="ui mini modal" id="sb-undo-modal">
+        <div class="header">Corrigir placar</div>
+        <div class="content">
+          <div class="ui two column grid">
+            <div class="center aligned column">
+              <p id="sb-undo-team-a">Team A</p>
+              <p><a class="ui pointing big blue label" id="sb-undo-team-a-score">234</a></p>
+              <button class="ui icon button" id="sb-undo-team-a-plus"><i class="plus icon"></i></button>
+              <button class="ui icon button" id="sb-undo-team-a-minus"><i class="minus icon"></i></button>
+            </div>
+            <div class="center aligned column">
+              <p id="sb-undo-team-b">Team B</p>
+              <p><a class="ui pointing big blue label" id="sb-undo-team-b-score">1234</a></p>
+              <button class="ui icon button" id="sb-undo-team-b-plus"><i class="plus icon"></i></button>
+              <button class="ui icon button" id="sb-undo-team-b-minus"><i class="minus icon"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui approve button">Fechar</div>
+        </div>
+      </div>
+
       <!-- Main screen -->
       <div class="ui grid">
 
       <!-- First row -->
         <!-- Empty so far  -->
         <div class="three wide column">
-          <button class="ui icon button sb-labelled" id="sb-undo-btn">
+          <button class="ui icon button" id="sb-undo-btn">
             <i class="undo icon"></i>
           </button>
         </div>
