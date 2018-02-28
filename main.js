@@ -42,7 +42,7 @@ let template = [{
     }
   }]
   }, {
-    label: "Window",
+    label: "Janela",
     role: "window",
     submenu: [{
       label: "Minimize",
@@ -65,22 +65,19 @@ let template = [{
     },{
       type: "separator"
     },{
-      label: "Reload",
-      accelerator: "CmdOrCtrl+R",
-      click: function (item, focusedWindow) {
-        if (focusedWindow) {
-          // on reload, start fresh and close any old
-          // open secondary windows
-          if (focusedWindow.id === 1) {
-            BrowserWindow.getAllWindows().forEach(function (win) {
-              if (win.id > 1) {
-                win.close()
-              }
-            })
-          }
-          focusedWindow.reload()
-        }
-      }
+      label: "Zoom In",
+      accelerator: "CmdOrCtrl+Plus",
+      role: "zoomin"
+    },{
+      label: "Zoom Out",
+      accelerator: "CmdOrCtrl+-",
+      role: "zoomout"
+    },{
+      label: "Zoom Reset",
+      accelerator: "CmdOrCtrl+0",
+      role: "resetzoom"
+    },{
+      type: "separator"
     },{
       label: 'Toggle Developer Tools',
       accelerator: (function () {
