@@ -80,3 +80,11 @@
     transform: translateX(-50%);
     overflow: hidden;
 }
+
+.sb-modal {
+  top: 30% !important;
+}
+.sb-modal-team {
+  font-size: 1.2em;
+  margin-bottom: 0px;
+}

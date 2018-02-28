@@ -115,7 +115,7 @@
       </div>
 
       <!-- Reset password check modal -->
-      <div class="ui mini modal" id="sb-password-modal">
+      <div class="ui mini modal sb-modal" id="sb-password-modal">
         <div class="header">Reset Protection</div>
         <div class="content">
           <p>You are about to reset the game. If you are sure about that please type the password:</p>
@@ -131,18 +131,18 @@
       </div>
 
       <!-- Undo modal -->
-      <div class="ui mini modal" id="sb-undo-modal">
+      <div class="ui mini modal sb-modal" id="sb-undo-modal">
         <div class="header">Corrigir placar</div>
         <div class="content">
           <div class="ui two column grid">
             <div class="center aligned column">
-              <p id="sb-undo-team-a">Team A</p>
+              <p id="sb-undo-team-a" class="sb-modal-team">Team A</p>
               <p><a class="ui pointing big blue label" id="sb-undo-team-a-score">234</a></p>
               <button class="ui icon button" id="sb-undo-team-a-plus"><i class="plus icon"></i></button>
               <button class="ui icon button" id="sb-undo-team-a-minus"><i class="minus icon"></i></button>
             </div>
             <div class="center aligned column">
-              <p id="sb-undo-team-b">Team B</p>
+              <p id="sb-undo-team-b" class="sb-modal-team">Team B</p>
               <p><a class="ui pointing big blue label" id="sb-undo-team-b-score">1234</a></p>
               <button class="ui icon button" id="sb-undo-team-b-plus"><i class="plus icon"></i></button>
               <button class="ui icon button" id="sb-undo-team-b-minus"><i class="minus icon"></i></button>
