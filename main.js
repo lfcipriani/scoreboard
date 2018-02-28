@@ -10,10 +10,8 @@ const BrowserWindow = electron.BrowserWindow
 const Menu = electron.Menu
 
 let mainWindow
-global.settingsPath = path.join(app.getPath("appData"),
-  "scoreboard", process.env.SCOREBOARD_DB_SETTINGS)
-global.gamePath = path.join(app.getPath("appData"),
-  "scoreboard", process.env.SCOREBOARD_DB_GAME)
+global.settingsPath = path.join(app.getPath("userData"), process.env.SCOREBOARD_DB_SETTINGS)
+global.gamePath = path.join(app.getPath("userData"), process.env.SCOREBOARD_DB_GAME)
 global.settingsPassword = process.env.SCOREBOARD_SETTINGS_PASSWORD
 
 let template = [
