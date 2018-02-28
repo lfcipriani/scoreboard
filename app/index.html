@@ -166,9 +166,16 @@
         </div>
         <!-- Countdown -->
         <div class="ten wide center aligned column">
-          <canvas id="sb-countdown-canvas" class="sb-digits-container" width="250" height="80">
-            Your browser is unfortunately not supported.
-          </canvas>
+          <div class="sb-digits-container sb-status">
+            <p>
+              <a class="ui empty circular tiny label off" id="sb-status-planned"></a> pré-jogo&nbsp;&nbsp;&nbsp;&nbsp;
+              <a class="ui empty circular tiny label off" id="sb-status-ongoing"></a> em jogo&nbsp;&nbsp;&nbsp;&nbsp;
+              <a class="ui empty circular tiny label off" id="sb-status-finished"></a> finalizado
+            </p>
+            <canvas id="sb-countdown-canvas" width="250" height="80">
+              Your browser is unfortunately not supported.
+            </canvas>
+          </div>
         </div>
         <!-- Header icons -->
         <div class="three wide right aligned column">

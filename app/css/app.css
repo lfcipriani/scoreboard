@@ -63,12 +63,25 @@
 
 .sb-digits-container {
   border: 4px solid #c3c2c2;
+  display: table;
+  margin: 0 auto;
   padding: 4px 20px;
   background-color: rgb(36, 30, 30);/*rgb(13, 15, 16); */
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px; /* future proofing */
   -khtml-border-radius: 10px; /* for old Konqueror browsers */
+}
+.sb-status {}
+.sb-status p {
+  color: #c3c2c2 !important;
+  margin: 1px !important;
+}
+.sb-status a.on {
+  background-color: #e95d0f !important;
+}
+.sb-status a.off {
+  background-color: #4b1e05 !important;
 }
 
 #sb-message {

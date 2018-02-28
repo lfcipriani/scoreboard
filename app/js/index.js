@@ -124,17 +124,29 @@ $(() => {
   function scheduleStateChange (event) {
     switch (event.state) {
     case "planned":
+      $("#sb-status-planned").addClass("on").removeClass("off")
+      $("#sb-status-ongoing").addClass("off").removeClass("on")
+      $("#sb-status-finished").addClass("off").removeClass("on")
       displayCountdown.setValue(event.strftime("%I:%M:%S"))
       break
     case "ongoing":
+      $("#sb-status-planned").addClass("off").removeClass("on")
+      $("#sb-status-ongoing").addClass("on").removeClass("off")
+      $("#sb-status-finished").addClass("off").removeClass("on")
       displayCountdown.setValue(event.strftime("%I:%M:%S"))
       break
     case "finished":
+      $("#sb-status-planned").addClass("off").removeClass("on")
+      $("#sb-status-ongoing").addClass("off").removeClass("on")
+      $("#sb-status-finished").addClass("on").removeClass("off")
       displayCountdown.setValue("00:00:00")
       break
     default:
       $("#sb-settings-btn").find("div.label").show()
-      displayCountdown.setValue("00:00:00")
+      $("#sb-status-planned").addClass("off").removeClass("on")
+      $("#sb-status-ongoing").addClass("off").removeClass("on")
+      $("#sb-status-finished").addClass("off").removeClass("on")
+      displayCountdown.setValue("--:--:--")
     }
   }
 
