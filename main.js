@@ -96,8 +96,8 @@ let template = [
 
 function createWindow () {
   mainWindow = new BrowserWindow({
-    width: 1120,
-    height: 720,
+    width: 1150,
+    height: 750,
     icon: path.join(__dirname, "app/assets/icons/bballicon.png")
   })
 

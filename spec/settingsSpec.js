@@ -42,9 +42,9 @@ describe("Settings", () => {
       let settings = new Settings()
       let result = await settings.teams()
 
-      expect(result.teamA.name).toBe("Nicks")
+      expect(result.teamA.name).toBe("Verde")
       expect(result.teamA.logo).toBe(null)
-      expect(result.teamB.name).toBe("Cavaliers")
+      expect(result.teamB.name).toBe("Laranja")
       expect(result.teamB.logo).toBe(null)
     })
 
