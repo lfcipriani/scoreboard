@@ -1,6 +1,6 @@
 {
   "name": "Maratona",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "Scoreboard system for basketball marathons",
   "main": "main.js",
   "scripts": {
